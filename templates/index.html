@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiter Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    .btn-primary {
+      background-color: #4b7bec;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #3867d6;
+    }
+    #loader {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card p-4">
+          <h3 class="mb-3 text-center">Recruiter Assistant</h3>
+          <!-- ✅ Form POSTs to /results -->
+          <form id="jdForm" method="POST" action="/results" onsubmit="showLoader()">
+            <div class="mb-3">
+              <label for="position" class="form-label">Position Name</label>
+              <!-- ✅ Must use name="position_name" -->
+              <input type="text" class="form-control" id="position" name="position_name" value="Software Engineer" required>
+            </div>
+            <div class="mb-3">
+              <label for="jd" class="form-label">Job Description</label>
+              <!-- ✅ Must use name="jd" -->
+              <textarea class="form-control" id="jd" name="jd" rows="10" required>
+At Ema, our technology solves problems. We’ve established the company as a leading developer of innovative software solutions, and we’re looking for a highly skilled software engineer to join our program and network design team. The ideal candidate will have expert knowledge of software development processes, along with solid experience in testing and evaluating current networking systems. This person should be highly motivated in finding technical issues and fixing them with meticulous code.
+
+Objectives of this role
+-Enhance existing platform and network capabilities to handle massive growth, enabling new insights and products based on data via self-serve computing, reporting solutions, and interactive querying
+-Visualize, design, and develop innovative software platforms as we continue to experience growth in the usage and visibility of our products
+-Create scalable software platforms and applications, as well as efficient networking solutions, that are unit tested, code reviewed, and checked regularly for continuous integration
+-Examine existing systems for flaws and create solutions that improve service uptime and time-to-resolve through monitoring and automated remediation
+-Plan and execute full software development lifecycle for each assigned project, adhering to company standards and expectations
+
+Responsibilities
+-Design and build tools and frameworks to automate the development, testing, deployment, and management of services and products
+-Plan and scale distributed software and applications, using synchronous and asynchronous design patterns, writing code, and delivering with urgency and quality
+-Collaborate with global team to produce project plans and analyze the efficiency and feasibility of project operations, leveraging global technology stack and making localized improvements
+-Track, document, and maintain software and network system functionality, and leverage any opportunity to improve engineering
+-Focus on creating software and networking platforms that are free of faulty programming, and continuously keep developers in step without compromising site reliability
+-Work with product managers and user-experience designers to influence the strategy and delivery of next-wave product features and system capabilities
+
+Required skills and qualifications
+-Five or more years of experience as engineer of software and networking platforms
+-Seven or more years of experience (professional and academic) with Java, Python, and C++
+-Proven ability to document design processes, including development, testing, analytics, and troubleshooting
+-Experience with rapid development cycles in a web-based environment
+-Strong ability in scripting and test automation
+-Desire to continue professional growth through training and education
+
+Preferred skills and qualifications
+-Bachelor’s degree (or equivalent) in software engineering or information technology
+-Working knowledge of relational databases as well as ORM and SQL technologies
+-Proficiency with HTML5, CSS3, and content management systems
+-Web application development experience with multiple frameworks, including Wicket, GWT, and Spring MVC
+              </textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+          </form>
+          <div class="text-center mt-3" id="loader">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2">Processing candidates...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showLoader() {
+      document.getElementById("loader").style.display = "block";
+    }
+  </script>
+</body>
+</html>

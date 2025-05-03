@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Candidate Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    .btn-primary {
+      background-color: #4b7bec;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #3867d6;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2>Top Candidates for "{{ candidates.position_name }}"</h2>
+    </div>
+
+    {% if candidates.top_candidates %}
+      {% for candidate in candidates.top_candidates %}
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Candidate Match</h5>
+            <p><strong>Similarity Score:</strong> {{ candidate.score | round(2) }}</p>
+            <h6 class="mt-4">AI Evaluation Report:</h6>
+            <div>{{ candidate.explanation | markdown }}</div>
+
+            <button class="btn btn-primary mt-3 generate-email"
+                    data-resume="{{ candidate.resume | replace('\n', ' ') | e }}"
+                    data-position="{{ candidates.position_name }}">
+              Generate Interview Email
+            </button>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-center text-muted">No suitable candidates found.</p>
+    {% endif %}
+
+    <div class="text-center">
+      <a href="/" class="btn btn-secondary mt-4">← Back to Job Input</a>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="emailModalLabel">Generated Interview Email</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <pre id="emailContent" style="white-space: pre-wrap; word-break: break-word;"></pre>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="copyEmail()">Copy Email</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function copyEmail() {
+      const emailText = document.getElementById("emailContent").textContent;
+      navigator.clipboard.writeText(emailText).then(() => {
+        alert("Email copied to clipboard!");
+      });
+    }
+
+    document.querySelectorAll(".generate-email").forEach(button => {
+      button.addEventListener("click", () => {
+        const resume = button.getAttribute("data-resume");
+        const position = button.getAttribute("data-position");
+
+        fetch("/generate_mail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ resume: resume, position_name: position })
+        })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("emailContent").textContent = data.email;
+          const modal = new bootstrap.Modal(document.getElementById('emailModal'));
+          modal.show();
+        })
+        .catch(err => {
+          alert("Error generating email");
+          console.error(err);
+        });
+      });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

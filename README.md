@@ -93,7 +93,7 @@ The application uses a hybrid approach combining traditional NLP techniques with
 
 5. Run the application:
    ```
-   python app.py
+   gunicorn app:app --threads=4
    ```
 
 6. Access the web interface at `http://localhost:8000`

@@ -72,7 +72,7 @@ The application uses a hybrid approach combining traditional NLP techniques with
 
 1. Clone the repository:
    ```
-   git clone <repository-url>
+   git clone https://github.com/Devparihar5/recruiting-agent.git
    cd recruiting-agent
    ```
 
@@ -96,7 +96,7 @@ The application uses a hybrid approach combining traditional NLP techniques with
    python app.py
    ```
 
-6. Access the web interface at `http://localhost:5000`
+6. Access the web interface at `http://localhost:8000`
 
 ## Usage
 

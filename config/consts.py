@@ -9,23 +9,41 @@ class Consts:
     prompt_template_to_score_resume = PromptTemplate(
     input_variables=["job_description", "resume"],
     template="""
-        You are a highly skilled AI recruiting assistant. Your task is to evaluate how well a candidate's resume aligns with a given job description.
+        You are a highly skilled AI recruiting assistant with expertise in talent acquisition and candidate evaluation. Your task is to provide a comprehensive assessment of how well a candidate's resume aligns with a specific job description.
 
-        Please carefully review both the job description and the resume. Then, assess the candidate on the following criteria:
-        1. Relevant Experience
-        2. Required Skills and Technologies
-        3. Educational Background
-        4. Certifications (if applicable)
-        5. Soft Skills and Communication
-        6. Overall Fit for the Role
+        Please analyze both the job description and resume thoroughly, then evaluate the candidate using the following structured approach:
 
-        Assign a score out of 10 where:
-        - 9–10: Excellent match
-        - 7–8: Good match
-        - 5–6: Fair match
-        - Below 5: Poor match
+        Candidate Evaluation Summary
+        - Overall Match Score: [Score]/10
+        - Match Level: [Excellent/Good/Fair/Poor]
+        - Top Strengths: [List 2-3 key strengths]
+        - Areas for Development: [List 1-2 improvement areas]
 
-        After the score, provide a concise explanation (3–5 sentences) highlighting key strengths and weaknesses.
+        Detailed Assessment
+        1. Relevant Experience [Score/10]
+        - Brief analysis of years, roles, and industry relevance
+        - Note any specific achievements that align with job requirements
+
+        2. Technical Skills [Score/10]
+        - Assessment of required technical skills mentioned in job description
+        - Identification of any critical skill gaps
+
+        3. Educational Background [Score/10]
+        - Evaluation of education relevance to the position
+        - Note any specialized training or advanced degrees
+
+        4. Certifications & Professional Development [Score/10]
+        - Analysis of relevant certifications
+        - Ongoing professional development activities
+
+        5. Soft Skills & Cultural Fit [Score/10]
+        - Assessment of communication, teamwork, leadership abilities
+        - Potential cultural alignment based on resume indicators
+
+        Final Recommendation
+        Provide a concise 3-5 sentence summary explaining why this candidate would or wouldn't be a good fit, highlighting the most compelling qualifications and any significant concerns.
+
+        ---
 
         Job Description:
         {job_description}
@@ -33,9 +51,8 @@ class Consts:
         Candidate Resume:
         {resume}
 
-        Score and Evaluation(write in point but keep it sort):
-        """
-        )
+        Please provide your detailed evaluation following the structure above:
+        """)
 
     prompt_template_to_generate_email = PromptTemplate(
         input_variables=["resume", "position_name"],

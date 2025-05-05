@@ -3,46 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recruiter Assistant</title>
+  <title>Recruiting Agent | Smart Recruiting Assistant</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #f4f6f9;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .card {
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    }
-    .btn-primary {
-      background-color: #4b7bec;
-      border: none;
-    }
-    .btn-primary:hover {
-      background-color: #3867d6;
-    }
-    #loader {
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-  <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card p-4">
-          <h3 class="mb-3 text-center">Recruiter Assistant</h3>
-          <!-- ✅ Form POSTs to /results -->
-          <form id="jdForm" method="POST" action="/results" onsubmit="showLoader()">
-            <div class="mb-3">
-              <label for="position" class="form-label">Position Name</label>
-              <!-- ✅ Must use name="position_name" -->
-              <input type="text" class="form-control" id="position" name="position_name" value="Software Engineer" required>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-user-tie me-2"></i>Recruiting Agent
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#how-it-works">How It Works</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="container mt-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold mb-3">Smart Recruiting Assistant</h1>
+        <p class="lead mb-4">Match job descriptions with candidate resumes using AI and generate personalized communications.</p>
+        <a href="#job-form" class="btn btn-primary btn-lg">Get Started</a>
+      </div>
+      <div class="col-lg-6">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-fluid rounded-3 shadow" alt="Recruiting">
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <section id="features" class="py-5 mt-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Key Features</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 p-4">
+            <div class="feature-icon">
+              <i class="fas fa-search"></i>
             </div>
-            <div class="mb-3">
-              <label for="jd" class="form-label">Job Description</label>
-              <!-- ✅ Must use name="jd" -->
-              <textarea class="form-control" id="jd" name="jd" rows="10" required>
+            <h4>Resume Matching</h4>
+            <p class="text-muted">Analyzes resumes against job descriptions to find the best matches using advanced AI algorithms.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4">
+            <div class="feature-icon">
+              <i class="fas fa-sort-amount-down"></i>
+            </div>
+            <h4>Candidate Ranking</h4>
+            <p class="text-muted">Scores and ranks candidates based on their qualifications and fit for the position.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4">
+            <div class="feature-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h4>Email Generation</h4>
+            <p class="text-muted">Creates personalized emails for candidate communication with just one click.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">How It Works</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <div class="d-flex mb-4">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">1</div>
+                <div class="ms-3">
+                  <h5>Enter Job Details</h5>
+                  <p class="text-muted">Input the position name and job description.</p>
+                </div>
+              </div>
+              <div class="d-flex mb-4">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">2</div>
+                <div class="ms-3">
+                  <h5>AI Matching</h5>
+                  <p class="text-muted">Our AI analyzes resumes and matches them with your job requirements.</p>
+                </div>
+              </div>
+              <div class="d-flex mb-4">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">3</div>
+                <div class="ms-3">
+                  <h5>Review Results</h5>
+                  <p class="text-muted">View ranked candidates with detailed AI evaluations.</p>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">4</div>
+                <div class="ms-3">
+                  <h5>Generate Communications</h5>
+                  <p class="text-muted">Create personalized emails for your top candidates.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Job Form Section -->
+  <section id="job-form" class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="mb-3">Find Your Ideal Candidates</h3>
+              <p class="text-muted">Enter the position details below to match with the best candidates.</p>
+            </div>
+            <div class="card-body p-4">
+              <form id="jdForm" method="POST" action="/results" onsubmit="showLoader()">
+                <div class="mb-4">
+                  <label for="position" class="form-label">Position Name</label>
+                  <input type="text" class="form-control" id="position" name="position_name" value="Software Engineer" required>
+                </div>
+                <div class="mb-4">
+                  <label for="jd" class="form-label">Job Description</label>
+                  <textarea class="form-control" id="jd" name="jd" rows="10" required>
 At [Company Name], our technology solves problems. We’ve established the company as a leading developer of innovative software solutions, and we’re looking for a highly skilled software engineer to join our program and network design team. The ideal candidate will have expert knowledge of software development processes, along with solid experience in testing and evaluating current networking systems. This person should be highly motivated in finding technical issues and fixing them with meticulous code.
 
 Objectives of this role
@@ -73,23 +176,44 @@ Preferred skills and qualifications
 -Working knowledge of relational databases as well as ORM and SQL technologies
 -Proficiency with HTML5, CSS3, and content management systems
 -Web application development experience with multiple frameworks, including Wicket, GWT, and Spring MVC
-              </textarea>
+                  </textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="fas fa-search me-2"></i>Find Matching Candidates
+                </button>
+              </form>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
-          </form>
-          <div class="text-center mt-3" id="loader">
-            <div class="spinner-border text-primary" role="status"></div>
-            <p class="mt-2">Processing candidates...</p>
           </div>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>Recruiting Agent</h5>
+          <p class="text-muted">A smart recruiting assistant that matches job descriptions with candidate resumes.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="mb-0 text-muted">&copy; 2025 Recruiting Agent. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Loader -->
+  <div id="loader" style="display: none;">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+      <h4>Processing Candidates</h4>
+      <p class="text-muted mb-0">This may take a moment as our AI analyzes resumes...</p>
+    </div>
   </div>
 
-  <script>
-    function showLoader() {
-      document.getElementById("loader").style.display = "block";
-    }
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
